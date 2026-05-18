@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Ecommerce Store</title>
+
+    <link rel="stylesheet"
+          href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <a href="/">Home</a>
+
+    <a href="/cart">Cart</a>
+
+    {% if user.is_authenticated %}
+
+        <a href="/logout">Logout</a>
+
+    {% else %}
+
+        <a href="/login">Login</a>
+
+        <a href="/register">Register</a>
+
+    {% endif %}
+
+</nav>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
