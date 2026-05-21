@@ -14,23 +14,68 @@
 
 <body>
 
-<nav>
+<!-- NAVBAR -->
 
-    <a href="/">Home</a>
+<nav class="navbar">
 
-    <a href="/cart">Cart</a>
+    <!-- LEFT -->
 
-    {% if user.is_authenticated %}
+    <div class="nav-left">
 
-        <a href="/logout">Logout</a>
+        <a class="logo"
+           href="/">
 
-    {% else %}
+           Ecommerce
 
-        <a href="/login">Login</a>
+        </a>
 
-        <a href="/register">Register</a>
+    </div>
 
-    {% endif %}
+    <!-- CENTER -->
+
+    <div class="nav-center">
+
+        <a href="/">Home</a>
+
+        <a href="/cart">Cart</a>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="nav-right">
+
+        {% if user.is_authenticated %}
+
+            <span class="welcome-user">
+
+                Hi, {{ user.username }}
+
+            </span>
+
+            <form action="{% url 'logout' %}"
+                  method="POST">
+
+                {% csrf_token %}
+
+                <button class="logout-btn"
+                        type="submit">
+
+                    Logout
+
+                </button>
+
+            </form>
+
+        {% else %}
+
+            <a href="/login">Login</a>
+
+            <a href="/register">Register</a>
+
+        {% endif %}
+
+    </div>
 
 </nav>
 
@@ -38,4 +83,5 @@
 {% endblock %}
 
 </body>
+
 </html>

@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Ecommerce Store</title>
+
+    <link rel="stylesheet"
+          href="{% static 'style.css' %}">
+
+</head>
+{% block content %}
+<body>
+    
+    <div class="form-container">
+        
+        <h1>Login</h1>
+        
+        <form method="POST">
+            
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+            
+            <button class="btn" type="submit">
+                Login
+            </button>
+            
+            <a class="btn"
+                href="{% url 'register' %}">
+                Register
+            </a>
+            
+        </form>
+        
+    </div>
+    
+    {% endblock %}
+</body>

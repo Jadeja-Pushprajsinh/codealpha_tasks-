@@ -1,8 +1,10 @@
 from django.shortcuts import render , redirect
 from django.shortcuts import get_object_or_404
 from .models import *
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def home(request):
     products = Product.objects.all()
     return render(request, 'home.html', {'products': products})
@@ -15,7 +17,7 @@ def product_detail(request, id):
         'product': product
     })
 
-
+@login_required
 def add_to_cart(request, product_id):
 
     product = Product.objects.get(id=product_id)
@@ -35,6 +37,7 @@ def add_to_cart(request, product_id):
 
     return redirect('cart')
 
+@login_required
 def cart(request):
 
     cart = Cart.objects.get(user=request.user)
@@ -46,11 +49,12 @@ def cart(request):
     for item in items:
         total += item.product.price * item.quantity
 
-    return render(request, '/cart.html', {
+    return render(request, 'cart.html', {
         'items': items,
         'total': total
     })
 
+@login_required
 def checkout(request):
 
     cart = Cart.objects.get(user=request.user)
@@ -77,7 +81,7 @@ def checkout(request):
 
     items.delete()
 
-    return render(request, '/success.html')
+    return render(request, 'success.html')
 
 def register(request):
 

@@ -1,23 +1,41 @@
-<h1>Your Cart</h1>
+{% extends 'base.html' %}
 
-{% for item in items %}
+{% block content %}
 
-<div>
+<h1 class="title">Your Cart</h1>
 
-    <h2>{{ item.product.name }}</h2>
+<div class="cart-container">
 
-    <p>Quantity: {{ item.quantity }}</p>
+    {% for item in items %}
 
-    <p>Price: ${{ item.product.price }}</p>
+    <div class="cart-card">
+
+        <img src="{{ item.product.image }}">
+        <div class="cart-details">
+
+            <h2>{{ item.product.name }}</h2>
+
+            <p>Quantity: {{ item.quantity }}</p>
+
+            <p>Price: ${{ item.product.price }}</p>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
 
 </div>
 
-<hr>
+<div class="total-box">
 
-{% endfor %}
+    <h2>Total: ${{ total }}</h2>
 
-<h2>Total: ${{ total }}</h2>
+    <a class="btn"
+       href="{% url 'checkout' %}">
+       Proceed To Checkout
+    </a>
 
-<a href="{% url 'checkout' %}">
-    Checkout
-</a>
+</div>
+
+{% endblock %}
