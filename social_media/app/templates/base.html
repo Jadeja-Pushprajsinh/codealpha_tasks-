@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Social Media App</title>
+
+    <link rel="stylesheet"
+          href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <a href="/">TalkiesTalks</a>
+
+    </div>
+
+    <div class="nav-links">
+
+        {% if user.is_authenticated %}
+
+            <a href="/">Feed</a>
+
+            <a href="/profile">Profile</a>
+
+            <form action="{% url 'logout' %}"
+                  method="POST">
+
+                {% csrf_token %}
+
+                <button class="logout-btn">
+
+                    Logout
+
+                </button>
+
+            </form>
+
+        {% else %}
+
+            <a href="/login">Login</a>
+
+            <a href="/register">Register</a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+{% block content %}
+{% endblock %}
+
+</body>
+
+</html>
