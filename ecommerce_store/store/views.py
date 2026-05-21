@@ -99,3 +99,45 @@ def register(request):
     return render(request, 'register.html', {
         'form': form
     })
+
+@login_required
+def increase_quantity(request, item_id):
+
+    item = CartItem.objects.get(id=item_id)
+
+    item.quantity += 1
+
+    item.save()
+
+    return redirect('cart')
+
+
+@login_required
+def decrease_quantity(request, item_id):
+
+    item = CartItem.objects.get(id=item_id)
+
+    if item.quantity > 1:
+
+        item.quantity -= 1
+
+        item.save()
+
+    else:
+
+        item.delete()
+
+    return redirect('cart')
+
+@login_required
+def orders(request):
+
+    user_orders = Order.objects.filter(
+        user=request.user
+    ).order_by('-created_at')
+
+    return render(request,
+                  'orders.html',
+                  {
+                      'orders': user_orders
+                  })

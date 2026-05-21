@@ -10,17 +10,46 @@
 
     <div class="cart-card">
 
+        <!-- PRODUCT IMAGE -->
+    
         <img src="{{ item.product.image }}">
+    
+        <!-- DETAILS -->
+    
         <div class="cart-details">
-
+    
             <h2>{{ item.product.name }}</h2>
-
-            <p>Quantity: {{ item.quantity }}</p>
-
-            <p>Price: ${{ item.product.price }}</p>
-
+    
+            <p>Price: ₹ {{ item.product.price }}</p>
+    
+            <!-- QUANTITY CONTROLS -->
+    
+            <div class="quantity-box">
+    
+                <a class="quantity-btn"
+                   href="{% url 'decrease_quantity' item.id %}">
+    
+                   -
+    
+                </a>
+    
+                <span class="quantity-number">
+    
+                    {{ item.quantity }}
+    
+                </span>
+    
+                <a class="quantity-btn"
+                   href="{% url 'increase_quantity' item.id %}">
+    
+                   +
+    
+                </a>
+    
+            </div>
+    
         </div>
-
+    
     </div>
 
     {% endfor %}

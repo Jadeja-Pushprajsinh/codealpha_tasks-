@@ -1,5 +1,34 @@
-<h1>Order Placed Successfully!</h1>
+{% extends 'base.html' %}
 
-<a href="{% url 'home' %}">
-    Continue Shopping
-</a>
+{% block content %}
+
+<div class="success-container">
+
+    <div class="success-card">
+
+        <div class="checkmark">
+
+            ✓
+
+        </div>
+
+        <h1>Order Placed Successfully!</h1>
+
+        <p>
+
+            Thank you for shopping with us.
+
+        </p>
+
+        <a class="btn"
+           href="/">
+
+           Continue Shopping
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

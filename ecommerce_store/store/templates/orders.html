@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="title">My Orders</h1>
+
+<div class="orders-container">
+
+    {% for order in orders %}
+
+    <div class="order-card">
+
+        <!-- TOP SECTION -->
+
+        <div class="order-top">
+
+            <div>
+
+                <h2>
+
+                    Order #{{ order.id }}
+
+                </h2>
+
+                <p>
+
+                    {{ order.created_at }}
+
+                </p>
+
+            </div>
+
+            <div class="order-total">
+
+                ₹ {{ order.total_price }}
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- PRODUCTS -->
+
+        {% for item in order.orderitem_set.all %}
+
+        <div class="ordered-product">
+
+            <!-- IMAGE -->
+
+            <img src="{{ item.product.image }}">
+
+            <!-- DETAILS -->
+
+            <div class="ordered-details">
+
+                <h3>
+
+                    {{ item.product.name }}
+
+                </h3>
+
+                <p>
+
+                    Quantity:
+                    {{ item.quantity }}
+
+                </p>
+
+                <p>
+
+                    Price:
+                    ₹ {{ item.product.price }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% empty %}
+
+    <div class="empty-orders">
+
+        <h2>No Orders Yet</h2>
+
+        <p>
+
+            Start shopping now.
+
+        </p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
