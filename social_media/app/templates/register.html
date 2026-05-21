@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h1>Create Account</h1>
+
+        <form method="POST">
+
+            {% csrf_token %}
+        
+            <!-- USERNAME -->
+        
+            <label>Username</label>
+        
+            {{ form.username }}
+        
+            <!-- PASSWORD -->
+        
+            <label>Password</label>
+        
+            {{ form.password1 }}
+        
+            <!-- CONFIRM PASSWORD -->
+        
+            <label>Confirm Password</label>
+        
+            {{ form.password2 }}
+        
+            <!-- ERRORS -->
+        
+            {{ form.errors }}
+        
+            <button class="auth-btn"
+                    type="submit">
+        
+                Register
+        
+            </button>
+        
+        </form>
+
+        <p class="auth-link">
+
+            Already have an account?
+
+            <a href="/login">
+
+                Login
+
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
