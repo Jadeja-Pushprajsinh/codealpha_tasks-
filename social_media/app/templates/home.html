@@ -44,13 +44,12 @@
         <div class="post-header">
 
             <div>
-
-                <h3>
-
-                    {{ post.user.username }}
-
-                </h3>
-
+                <a class="profile-link"
+                href="{% url 'profile' post.user.username %}">
+             
+                {{ post.user.username }}
+             
+                </a>
                 <p>
 
                     {{ post.created_at }}
