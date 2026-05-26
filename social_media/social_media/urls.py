@@ -31,5 +31,6 @@ urlpatterns = [
     path('users/',users_list,name='users'),
     path('edit-profile/',edit_profile,name='edit_profile'),
     path('edit-post/<int:post_id>/',edit_post,name='edit_post'),
+    path('delete-post/<int:post_id>/',delete_post,name='delete_post'),
     path('' , include('django.contrib.auth.urls')), 
 ]

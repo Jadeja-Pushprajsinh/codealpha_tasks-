@@ -843,3 +843,26 @@ body{
 
     font-size:15px;
 }
+
+.post-owner-actions{
+
+    display:flex;
+
+    gap:20px;
+
+    margin-bottom:20px;
+}
+
+.post-owner-actions a{
+
+    text-decoration:none;
+
+    color:#007bff;
+
+    font-weight:bold;
+}
+
+.post-owner-actions a:hover{
+
+    color:#0056b3;
+}

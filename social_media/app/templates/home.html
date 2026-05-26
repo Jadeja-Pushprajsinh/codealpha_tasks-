@@ -57,7 +57,25 @@
                 </p>
 
             </div>
+            {% if request.user == post.user %}
 
+            <div class="post-owner-actions">
+            
+                <a href="{% url 'edit_post' post.id %}">
+            
+                    Edit
+            
+                </a>
+            
+                <a href="{% url 'delete_post' post.id %}">
+            
+                    Delete
+            
+                </a>
+            
+            </div>
+            
+            {% endif %}
         </div>
 
         <!-- CONTENT -->

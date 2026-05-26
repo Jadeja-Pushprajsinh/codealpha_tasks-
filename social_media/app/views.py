@@ -303,10 +303,22 @@ def edit_post(request, post_id):
 
         request,
 
-        'app/edit_post.html',
+        'edit_post.html',
 
         {
 
             'post': post
         }
     )
+@login_required
+def delete_post(request, post_id):
+
+    post = Post.objects.get(id=post_id)
+
+    # SECURITY CHECK
+
+    if post.user == request.user:
+
+        post.delete()
+
+    return redirect('home')
