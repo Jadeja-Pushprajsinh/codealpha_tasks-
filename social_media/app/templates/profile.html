@@ -68,9 +68,39 @@
 
                 </div>
 
-            </div>
+                
+                <!-- FOLLOW BUTTON -->
+                
+                {% if request.user != profile.user %}
+                
+            <a class="follow-btn"
+            href="{% url 'follow_user' profile.user.username %}">
+            
+            {% if is_following %}
+            
+            Unfollow
+            
+            {% else %}
+            
+            Follow
+            
+            {% endif %}
+            
+        </a>
+        
+        {% endif %}
+    </div>
+    {% if request.user == profile.user %}
 
-        </div>
+        <a class="follow-btn"
+        href="{% url 'edit_profile' %}">
+
+        Edit Profile
+
+        </a>
+
+    {% endif %}
+    </div>
 
     </div>
 

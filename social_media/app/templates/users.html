@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="title">
+
+    Discover People
+
+</h1>
+
+<div class="users-container">
+
+    {% for user in users %}
+
+    <div class="user-card">
+
+        <!-- IMAGE -->
+
+        <img src="{{ user.profile.profile_image }}">
+
+        <!-- INFO -->
+
+        <div class="user-info">
+
+            <a class="user-profile-link"
+               href="{% url 'profile' user.username %}">
+
+                <h2>
+
+                    {{ user.username }}
+
+                </h2>
+
+            </a>
+
+            <p>
+
+                {{ user.profile.bio }}
+
+            </p>
+
+        </div>
+
+        <!-- FOLLOW BUTTON -->
+
+        <div>
+
+            <a class="follow-btn"
+               href="{% url 'follow_user' user.username %}">
+
+                {% if user.id in following_users %}
+
+                    Unfollow
+
+                {% else %}
+
+                    Follow
+
+                {% endif %}
+
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

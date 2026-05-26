@@ -27,5 +27,9 @@ urlpatterns = [
     path('like/<int:post_id>/',like_post,name='like_post'),
     path('comment/<int:post_id>/',add_comment,name='add_comment'),
     path('profile/<str:username>/',profile,name='profile'),
+    path('follow/<str:username>/',follow_user,name='follow_user'),
+    path('users/',users_list,name='users'),
+    path('edit-profile/',edit_profile,name='edit_profile'),
+    path('edit-post/<int:post_id>/',edit_post,name='edit_post'),
     path('' , include('django.contrib.auth.urls')), 
 ]

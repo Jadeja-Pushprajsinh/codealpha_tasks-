@@ -1,0 +1,39 @@
+{% extends base.html' %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h1>Edit Post</h1>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <textarea
+                name="content">
+
+                {{ post.content }}
+
+            </textarea>
+
+            <input type="text"
+                   name="image"
+                   value="{{ post.image }}">
+
+            <button class="auth-btn"
+                    type="submit">
+
+                Update Post
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
