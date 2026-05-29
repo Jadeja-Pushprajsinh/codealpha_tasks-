@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="task-detail-container">
+
+    <div class="task-detail-card">
+
+        <h1>{{ task.title }}</h1>
+
+        <p>{{ task.description }}</p>
+
+        <div class="task-meta">
+
+            <p>
+                👤 Assigned To:
+                {% if task.assigned_to %}
+                    {{ task.assigned_to.username }}
+                {% else %}
+                    Unassigned
+                {% endif %}
+            </p>
+
+            <p>
+                📌 Status:
+                {{ task.status }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- COMMENTS -->
+
+    <div class="comments-section">
+
+        <h2>
+            Team Discussion
+        </h2>
+
+        <p>
+            Total Comments:
+            {{ comments.count }}
+        </p>
+
+        {% for comment in comments %}
+
+            <div class="comment-card">
+
+                <strong>
+
+                    {{ comment.user.username }}
+
+                </strong>
+
+                <span>
+
+                    {{ comment.created_at|date:"d M Y H:i" }}
+
+                </span>
+
+                <p>
+
+                    {{ comment.text }}
+
+                </p>
+
+            </div>
+
+        {% empty %}
+
+            <div class="comment-card">
+
+                No comments yet.
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- COMMENT FORM -->
+
+    <div class="comment-form">
+
+        <h3>
+            Add Comment
+        </h3>
+
+        <form method="POST"
+              action="{% url 'add_comment' task.id %}">
+
+            {% csrf_token %}
+
+            <textarea
+                name="comment"
+                placeholder="Write your comment..."
+                required></textarea>
+
+            <button type="submit">
+
+                Post Comment
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- BACK BUTTON -->
+
+    <div style="margin-top:20px;">
+
+        <a href="{% url 'project_board' task.project.id %}"
+           class="create-btn">
+
+            ← Back to Board
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

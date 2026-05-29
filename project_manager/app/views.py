@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth.decorators import login_required
 
-from .models import *
+from app.models import *
  
 def register(request):
 
@@ -41,10 +41,21 @@ def register(request):
 def dashboard(request):
 
     projects = Project.objects.filter(
-
         members=request.user
-
     )
+
+    total_projects = projects.count()
+
+    total_tasks = Task.objects.filter(
+        project__members=request.user
+    ).count()
+
+    completed_tasks = Task.objects.filter(
+        project__members=request.user,
+        status='DONE'
+    ).count()
+
+    pending_tasks = total_tasks - completed_tasks
 
     return render(
 
@@ -54,10 +65,18 @@ def dashboard(request):
 
         {
 
-            'projects': projects
+            'projects': projects,
+
+            'total_projects': total_projects,
+
+            'total_tasks': total_tasks,
+
+            'completed_tasks': completed_tasks,
+
+            'pending_tasks': pending_tasks
         }
     )
-
+    
 @login_required
 def create_project(request):
 
@@ -249,4 +268,74 @@ def create_task(request, project_id):
 
             'project': project
         }
+    )
+
+@login_required
+def update_task_status(request,task_id,status):
+
+    task = Task.objects.get(
+        id=task_id
+    )
+
+    task.status = status
+
+    task.save()
+
+    return redirect(
+        'project_board',
+        project_id=task.project.id
+    )
+
+@login_required
+def task_detail(request, task_id):
+
+    task = Task.objects.get(
+        id=task_id
+    )
+
+    comments = Comment.objects.filter(
+        task=task
+    ).order_by('created_at')
+
+    return render(
+
+        request,
+
+        'task_detail.html',
+
+        {
+
+            'task': task,
+
+            'comments': comments
+        }
+    )
+    
+@login_required
+def add_comment(request, task_id):
+
+    task = Task.objects.get(
+        id=task_id
+    )
+
+    if request.method == 'POST':
+
+        text = request.POST.get(
+            'comment'
+        )
+
+        if text:
+
+            Comment.objects.create(
+
+                task=task,
+
+                user=request.user,
+
+                text=text
+            )
+
+    return redirect(
+        'task_detail',
+        task_id=task.id
     )

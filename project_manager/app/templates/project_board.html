@@ -17,11 +17,11 @@
     </p>
 
     <a href="{% url 'create_task' project.id %}"
-    class="create-btn">
-
+    class="create-btn add-task-btn">
+ 
     + Add Task
-
-    </a>
+ 
+ </a>
 </div>
 
 <div class="kanban-board">
@@ -40,33 +40,64 @@
 
         <div class="task-card">
 
-            <h3>
+        <a href="{% url 'task_detail' task.id %}"
+        class="task-title">
+
+             {{ task.title }}
+
+        </a>
         
-                {{ task.title }}
-        
-            </h3>
-        
-            <p>
-        
-                {{ task.description|truncatechars:80 }}
-        
-            </p>
+            <p>{{ task.description }}</p>
         
             {% if task.assigned_to %}
+                <div class="task-user">
+                    👤 {{ task.assigned_to.username }}
+                </div>
+            {% endif %}
         
-            <div class="task-user">
+            <div class="task-actions">
         
-                👤 {{ task.assigned_to.username }}
+                {% if task.status == 'TODO' %}
+        
+                    <a href="{% url 'update_task_status' task.id 'IN_PROGRESS' %}"
+                       class="task-btn">
+        
+                        Start Task
+        
+                    </a>
+        
+                {% elif task.status == 'IN_PROGRESS' %}
+        
+                    <a href="{% url 'update_task_status' task.id 'DONE' %}"
+                       class="task-btn">
+        
+                        Mark Complete
+        
+                    </a>
+        
+                {% endif %}
         
             </div>
-        
-            {% endif %}
         
         </div>
 
         {% empty %}
 
-        <p>No Tasks</p>
+        <div class="empty-state">
+
+            <h3>
+        
+                🚀 No Tasks Yet
+        
+            </h3>
+        
+            <p>
+        
+                Create your first task and start managing work.
+        
+            </p>
+        
+        </div>
 
         {% endfor %}
 
@@ -86,13 +117,59 @@
 
         <div class="task-card">
 
-            {{ task.title }}
+            <div class="task-card">
+
+                <h3>{{ task.title }}</h3>
+            
+                <p>
+                    {{ task.description|truncatechars:60 }}
+                </p>
+            
+                {% if task.assigned_to %}
+                <div class="task-user">
+            
+                    👤 {{ task.assigned_to.username }}
+            
+                </div>
+                {% endif %}
+            
+                <div class="task-buttons">
+            
+                    <a href="{% url 'task_detail' task.id %}">
+                        Open
+                    </a>
+            
+                    {% if task.status == 'TODO' %}
+            
+                        <a href="{% url 'update_task_status' task.id 'IN_PROGRESS' %}">
+                            Start
+                        </a>
+            
+                    {% elif task.status == 'IN_PROGRESS' %}
+            
+                        <a href="{% url 'update_task_status' task.id 'DONE' %}">
+                            Complete
+                        </a>
+            
+                    {% endif %}
+            
+                </div>
+            
+            </div>
 
         </div>
 
         {% empty %}
 
-        <p>No Tasks</p>
+        <div class="empty-state">
+
+            <h3>
+        
+                No Progress Yet
+        
+            </h3>
+        
+        </div> 
 
         {% endfor %}
 
@@ -112,13 +189,51 @@
 
         <div class="task-card">
 
-            {{ task.title }}
+            <div class="task-card">
+
+                <h3>{{ task.title }}</h3>
+            
+                <p>
+                    {{ task.description|truncatechars:60 }}
+                </p>
+            
+                {% if task.assigned_to %}
+                <div class="task-user">
+            
+                    👤 {{ task.assigned_to.username }}
+            
+                </div>
+                {% endif %}
+            
+                <div class="task-buttons">
+            
+                    <a href="{% url 'task_detail' task.id %}">
+                        Open
+                    </a>
+            
+                    {% if task.status == 'TODO' %}
+            
+                        <a href="{% url 'update_task_status' task.id 'IN_PROGRESS' %}">
+                            Start
+                        </a>
+            
+                    {% elif task.status == 'IN_PROGRESS' %}
+            
+                        <a href="{% url 'update_task_status' task.id 'DONE' %}">
+                            Complete
+                        </a>
+            
+                    {% endif %}
+            
+                </div>
+            
+            </div>
 
         </div>
 
         {% empty %}
 
-        <p>No Tasks</p>
+        <p>No Tasks completed yet</p>
 
         {% endfor %}
 

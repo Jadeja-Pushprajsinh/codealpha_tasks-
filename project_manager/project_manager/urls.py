@@ -25,6 +25,9 @@ urlpatterns = [
     path('create-project/',create_project,name='create_project'),
     path('project/<int:project_id>/',project_board,name='project_board'),
     path('project/<int:project_id>/create-task/',create_task,name='create_task'),
+    path('task/<int:task_id>/comment/',add_comment,name='add_comment'),
+    path('task/<int:task_id>/',task_detail,name='task_detail'),
+    path('task/<int:task_id>/<str:status>/',update_task_status,name='update_task_status'),
     path('', include('django.contrib.auth.urls')),
     
 ]
