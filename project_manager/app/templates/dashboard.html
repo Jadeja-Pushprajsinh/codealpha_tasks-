@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h1>
+
+                Your Projects
+
+            </h1>
+
+            <p>
+
+                Manage your team workflow
+
+            </p>
+
+        </div>
+
+        <a href="/create-project"
+           class="create-btn">
+
+           + New Project
+
+        </a>
+
+    </div>
+
+    <!-- PROJECT GRID -->
+
+    <div class="projects-grid">
+
+        {% for project in projects %}
+
+        <div class="project-card">
+
+            <h2>
+
+                {{ project.name }}
+
+            </h2>
+
+            <p>
+
+                {{ project.description }}
+
+            </p>
+
+            <!-- MEMBERS -->
+
+            <div class="project-meta">
+
+                <span>
+
+                    👥 {{ project.members.count }} Members
+
+                </span>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-box">
+
+            <h2>
+
+                No Projects Yet
+
+            </h2>
+
+            <p>
+
+                Create your first project
+
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

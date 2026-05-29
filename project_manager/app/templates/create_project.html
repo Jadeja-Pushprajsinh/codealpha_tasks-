@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <div class="auth-box">
+
+        <h1>
+
+            Create New Project
+
+        </h1>
+
+        <p>
+
+            Organize your team workflow
+
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <!-- NAME -->
+
+            <label>
+
+                Project Name
+
+            </label>
+
+            <input type="text"
+                   name="name"
+                   placeholder="Enter project name"
+                   required>
+
+            <!-- DESCRIPTION -->
+
+            <label>
+
+                Description
+
+            </label>
+
+            <textarea
+                name="description"
+                placeholder="Describe your project"
+                required></textarea>
+
+                <!-- MEMBERS -->
+
+            <label>
+
+                Team Members
+
+            </label>
+
+            <input type="text"
+                name="members"
+                placeholder="Enter usernames separated by commas">
+
+            <p class="helper-text">
+
+                Example:
+                You, Youself , MYself
+
+            </p>
+
+            <button type="submit">
+
+                Create Project
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
