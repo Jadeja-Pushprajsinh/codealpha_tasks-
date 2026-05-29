@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <div class="auth-box">
+
+        <h1>
+
+            Create Task
+
+        </h1>
+
+        <p>
+
+            {{ project.name }}
+
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label>
+
+                Task Title
+
+            </label>
+
+            <input type="text"
+                   name="title"
+                   required>
+
+            <label>
+
+                Description
+
+            </label>
+
+            <textarea
+                name="description"
+                required></textarea>
+
+            <label>
+
+                Assign To
+
+            </label>
+
+            <input type="text"
+                   name="assigned_to"
+                   placeholder="username">
+
+            <button type="submit">
+
+                Create Task
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

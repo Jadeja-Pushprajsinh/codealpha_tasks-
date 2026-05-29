@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="board-header">
+
+    <h1>
+
+        {{ project.name }}
+
+    </h1>
+
+    <p>
+
+        {{ project.description }}
+
+    </p>
+
+    <a href="{% url 'create_task' project.id %}"
+    class="create-btn">
+
+    + Add Task
+
+    </a>
+</div>
+
+<div class="kanban-board">
+
+    <!-- TODO -->
+
+    <div class="column">
+
+        <h2>
+
+            To Do
+
+        </h2>
+
+        {% for task in todo_tasks %}
+
+        <div class="task-card">
+
+            <h3>
+        
+                {{ task.title }}
+        
+            </h3>
+        
+            <p>
+        
+                {{ task.description|truncatechars:80 }}
+        
+            </p>
+        
+            {% if task.assigned_to %}
+        
+            <div class="task-user">
+        
+                👤 {{ task.assigned_to.username }}
+        
+            </div>
+        
+            {% endif %}
+        
+        </div>
+
+        {% empty %}
+
+        <p>No Tasks</p>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- IN PROGRESS -->
+
+    <div class="column">
+
+        <h2>
+
+            In Progress
+
+        </h2>
+
+        {% for task in in_progress_tasks %}
+
+        <div class="task-card">
+
+            {{ task.title }}
+
+        </div>
+
+        {% empty %}
+
+        <p>No Tasks</p>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- DONE -->
+
+    <div class="column">
+
+        <h2>
+
+            Done
+
+        </h2>
+
+        {% for task in done_tasks %}
+
+        <div class="task-card">
+
+            {{ task.title }}
+
+        </div>
+
+        {% empty %}
+
+        <p>No Tasks</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

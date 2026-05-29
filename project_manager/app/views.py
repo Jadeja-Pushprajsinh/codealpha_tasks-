@@ -69,9 +69,21 @@ def create_project(request):
             'description'
         )
 
-        members_input = request.POST.get(
-            'members'
+        leader_username = request.POST.get(
+            'leader'
         )
+
+        # GET LEADER
+
+        try:
+
+            leader = User.objects.get(
+                username=leader_username
+            )
+
+        except User.DoesNotExist:
+
+            leader = request.user
 
         # CREATE PROJECT
 
@@ -81,22 +93,35 @@ def create_project(request):
 
             description=description,
 
-            created_by=request.user
+            created_by=request.user,
+
+            leader=leader
         )
 
         # ADD CREATOR
 
         project.members.add(request.user)
 
-        # ADD OTHER MEMBERS
+        # MEMBER USERNAMES
 
-        if members_input:
+        member_fields = [
 
-            usernames = members_input.split(',')
+            'member1',
 
-            for username in usernames:
+            'member2',
 
-                username = username.strip()
+            'member3',
+
+            'member4',
+
+            'member5'
+        ]
+
+        for field in member_fields:
+
+            username = request.POST.get(field)
+
+            if username:
 
                 try:
 
@@ -117,4 +142,111 @@ def create_project(request):
         request,
 
         'create_project.html'
+    )
+
+@login_required
+def project_board(request, project_id):
+
+    project = Project.objects.get(
+        id=project_id
+    )
+
+    todo_tasks = Task.objects.filter(
+
+        project=project,
+
+        status='TODO'
+    )
+
+    in_progress_tasks = Task.objects.filter(
+
+        project=project,
+
+        status='IN_PROGRESS'
+    )
+
+    done_tasks = Task.objects.filter(
+
+        project=project,
+
+        status='DONE'
+    )
+
+    return render(
+
+        request,
+
+        'project_board.html',
+
+        {
+
+            'project': project,
+
+            'todo_tasks': todo_tasks,
+
+            'in_progress_tasks': in_progress_tasks,
+
+            'done_tasks': done_tasks
+        }
+    )
+
+@login_required
+def create_task(request, project_id):
+
+    project = Project.objects.get(
+        id=project_id
+    )
+
+    if request.method == 'POST':
+
+        title = request.POST.get(
+            'title'
+        )
+
+        description = request.POST.get(
+            'description'
+        )
+
+        assigned_username = request.POST.get(
+            'assigned_to'
+        )
+
+        try:
+
+            assigned_user = User.objects.get(
+                username=assigned_username
+            )
+
+        except User.DoesNotExist:
+
+            assigned_user = None
+
+        Task.objects.create(
+
+            project=project,
+
+            title=title,
+
+            description=description,
+
+            assigned_to=assigned_user,
+
+            status='TODO'
+        )
+
+        return redirect(
+            'project_board',
+            project_id=project.id
+        )
+
+    return render(
+
+        request,
+
+        'create_task.html',
+
+        {
+
+            'project': project
+        }
     )

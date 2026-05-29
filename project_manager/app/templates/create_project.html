@@ -21,58 +21,110 @@
         <form method="POST">
 
             {% csrf_token %}
-
+        
             <!-- NAME -->
-
+        
             <label>
-
+        
                 Project Name
-
+        
             </label>
-
+        
             <input type="text"
                    name="name"
-                   placeholder="Enter project name"
                    required>
-
+        
             <!-- DESCRIPTION -->
-
+        
             <label>
-
+        
                 Description
-
+        
             </label>
-
+        
             <textarea
                 name="description"
-                placeholder="Describe your project"
                 required></textarea>
-
-                <!-- MEMBERS -->
-
+        
+            <!-- NUMBER OF MEMBERS -->
+        
             <label>
-
-                Team Members
-
+        
+                Number of Members
+        
             </label>
-
+        
+            <input type="number"
+                   name="member_count"
+                   min="1"
+                   max="5"
+                   required>
+        
+            <!-- LEADER -->
+        
+            <label>
+        
+                Team Leader Username
+        
+            </label>
+        
             <input type="text"
-                name="members"
-                placeholder="Enter usernames separated by commas">
-
-            <p class="helper-text">
-
-                Example:
-                You, Youself , MYself
-
-            </p>
-
+                   name="leader"
+                   required>
+        
+            <!-- MEMBERS -->
+        
+            <label>
+        
+                Member 1 Username
+        
+            </label>
+        
+            <input type="text"
+                   name="member1">
+        
+            <label>
+        
+                Member 2 Username
+        
+            </label>
+        
+            <input type="text"
+                   name="member2">
+        
+            <label>
+        
+                Member 3 Username
+        
+            </label>
+        
+            <input type="text"
+                   name="member3">
+        
+            <label>
+        
+                Member 4 Username
+        
+            </label>
+        
+            <input type="text"
+                   name="member4">
+        
+            <label>
+        
+                Member 5 Username
+        
+            </label>
+        
+            <input type="text"
+                   name="member5">
+        
             <button type="submit">
-
+        
                 Create Project
-
+        
             </button>
-
+        
         </form>
 
     </div>

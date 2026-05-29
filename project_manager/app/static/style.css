@@ -334,3 +334,117 @@ textarea{
 
     font-size:14px;
 }
+
+
+.board-header{
+
+    padding:40px;
+
+    text-align:center;
+}
+
+.board-header h1{
+
+    font-size:40px;
+
+    margin-bottom:10px;
+}
+
+.board-header p{
+
+    color:#6b7280;
+}
+
+/* BOARD */
+
+.kanban-board{
+
+    display:flex;
+
+    gap:30px;
+
+    padding:40px;
+
+    align-items:flex-start;
+}
+
+/* COLUMN */
+
+.column{
+
+    flex:1;
+
+    background:#f8fafc;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    min-height:500px;
+}
+
+.column h2{
+
+    margin-bottom:20px;
+
+    color:#111827;
+}
+
+/* TASK CARD */
+
+.task-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:14px;
+
+    margin-bottom:15px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.task-card:hover{
+
+    transform:translateY(-3px);
+}
+
+.task-card h3{
+
+    margin-bottom:10px;
+
+    color:#111827;
+}
+
+.task-card p{
+
+    color:#6b7280;
+
+    font-size:14px;
+
+    line-height:1.5;
+}
+
+.task-user{
+
+    margin-top:15px;
+
+    background:#eef2ff;
+
+    color:#4f46e5;
+
+    padding:8px 12px;
+
+    border-radius:999px;
+
+    display:inline-block;
+
+    font-size:13px;
+
+    font-weight:600;
+}
